@@ -9,10 +9,9 @@ async function registerService(id, password) {
             throw new CustomError("해당 ID가 이미 존재합니다", 400);
         } 
         const hashedPassword = await bcrypt.hash(password, 10); // 2^10번 수학적 연산으로 암호화
-        const result = await userContact.create({
+        await userContact.create({
             id: id, password: hashedPassword
         }); // id랑 암호화된 password를 userContact DB에 만들고 그 결과값을 result에 저장한다.
-        return result;
     }
     catch(error) {
         throw error;
